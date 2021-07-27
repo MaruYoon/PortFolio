@@ -21,7 +21,7 @@ void Player::Initialize()
 {
 	//** Texture[2][4][3];
 	
-
+	//strKey = "Player";
 
 	//우로 이동
 	//멈춤 상태

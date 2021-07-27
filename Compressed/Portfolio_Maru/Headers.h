@@ -4,6 +4,9 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <string>
+#include <map>
+#include <list>
 
 using namespace std;
 

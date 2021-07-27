@@ -30,6 +30,8 @@ private:
 	Object* BackDoor[9];
 	Object* BackExit[3];
 
+	map<string, list<Object*>> ObjectList;
+
 	int EnemyCount;
 	bool CheckInRoom;
 	bool CheckFloor;
@@ -48,6 +50,11 @@ public:
 	void SetCheckMission(const bool& m_CheckMission) { _CheckMission = m_CheckMission; }
 
 
+	//지정주석 처리 ctrl + k + C
+	//지정주석 해제 ctrl + k + U
+
+	//이름 바꾸기 ctrl + r+ r
+	//alt 선택 
 
 
 	Object* GetBackDoor(const int& _index) 
@@ -71,7 +78,7 @@ public:
 	void CreatExit();
 	void CreateEnemy();
     void FireBullet(int _index);
-
+	void AddObject(Object* _object);
 	
 
 private:

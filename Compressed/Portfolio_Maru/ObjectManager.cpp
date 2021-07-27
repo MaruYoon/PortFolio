@@ -37,6 +37,8 @@ Transform* ObjectManager::GetTopPlayer()
 
 void ObjectManager::Initialize()
 {
+	
+	map<string,<>
 
 	//스테이지 1
 	pBackGround = ObjectFactory<BackGround>::CreateObject();
@@ -58,7 +60,7 @@ void ObjectManager::Initialize()
 	CreatDoor();
 	CreatExit();
 
-	
+
 
 	for (int i = 0; i < 128; ++i)
 	{
@@ -453,6 +455,25 @@ void ObjectManager::FireBullet(int _index)
 
 			break;
 		}
+	}
+}
+
+
+void ObjectManager::AddObject(Object* _object)
+{
+	map<string, list<Object*>>::iterator iter = ObjectList.find(_object->GetKey());
+
+	if (iter == ObjectList.end())
+	{
+		list<Object*> TempList;
+
+		TempList.push_back(_object);
+
+		ObjectList.insert(make_pair(_object->GetKey(), TempList));
+	}
+	else
+	{
+		iter->second.push_back(_object);
 	}
 }
 

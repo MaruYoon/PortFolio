@@ -8,6 +8,7 @@ protected:
 	char* Texture[128];
 	bool Active;
 	int CheckRoom;
+	string strKey;
 
 public:
 	virtual void Initialize()PURE;
@@ -26,6 +27,11 @@ public:
 
 	bool GetActive() const { return Active; }
 	void SetActive(const bool& _Active) { Active = _Active; }
+
+	string GetKey() { return strKey; }
+
+
+
 public:
 	Object();
 	virtual ~Object();
