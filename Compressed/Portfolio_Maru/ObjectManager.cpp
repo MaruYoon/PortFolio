@@ -33,6 +33,8 @@ ObjectManager::~ObjectManager()
 Transform* ObjectManager::GetTopPlayer()
 {
 	return pTopPlayer->GetTransform();
+
+
 }
 
 void ObjectManager::Initialize()
@@ -88,7 +90,10 @@ void ObjectManager::Initialize()
 	CreatExit();
 
 	//Àû
-	AddObject(ObjectFactory<Enemy>::CreateObject());
+	for (int i = 0; i < 128; ++i)
+	{
+		AddObject(ObjectFactory<Enemy>::CreateObject());
+	}
 
 	EnemyCount = 0;
 	CheckInRoom = false;
@@ -101,9 +106,6 @@ void ObjectManager::Initialize()
 void ObjectManager::Update()
 {
 	
-	ObjectList.find()
-		
-
 	/*
 	for (int i = 0; i < OBJID_MAX; ++i)
 	{
@@ -169,8 +171,6 @@ void ObjectManager::Update()
 			}
 		}
 	}
-
-
 
 
 	ULONG ulKey = InputManager::Getinstance()->GetKey();
