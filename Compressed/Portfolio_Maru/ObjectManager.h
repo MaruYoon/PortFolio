@@ -17,6 +17,8 @@ public:
 
 private:
 
+
+	/*
 	Object* pPlayer;
 	Object* pTopPlayer;
 
@@ -24,13 +26,21 @@ private:
 	Object* pBackGround;
 	Object* Initem;
 
-	//Object* ObjectList[OBJID_MAX][128];
-
-    Object* InRoom[9];
-	Object* BackDoor[9];
-	Object* BackExit[3];
+    Object* InRoom;
+	Object* BackDoor;
+	Object* BackExit;
+	*/
 
 	map<string, list<Object*>> ObjectList;
+
+
+	//Object* ObjectList[OBJID_MAX][128];
+	/*
+	Object* InRoom[9];
+	Object* BackDoor[9];
+	Object* BackExit[3];
+	*/
+
 
 	int EnemyCount;
 	bool CheckInRoom;

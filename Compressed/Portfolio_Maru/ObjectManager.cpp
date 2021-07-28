@@ -57,6 +57,13 @@ void ObjectManager::Initialize()
 	pCheckMission = ObjectFactory<CheckMission>::CreateObject();
 	*/
 
+	/*
+	for (int i = 0; i < 128; ++i)
+	{
+		ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
+		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
+	}
+	*/
 
 
 	//스테이지1.
@@ -83,29 +90,19 @@ void ObjectManager::Initialize()
 	//적
 	AddObject(ObjectFactory<Enemy>::CreateObject());
 
-	/*
-	for (int i = 0; i < 128; ++i)
-	{
-		ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
-		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
-	}
-	*/
-
 	EnemyCount = 0;
 	CheckInRoom = false;
 	_CheckMission = false;
 
-
 	CreateEnemy();
 
-	
 }
 
 void ObjectManager::Update()
 {
 	
-
-
+	ObjectList.find()
+		
 
 	/*
 	for (int i = 0; i < OBJID_MAX; ++i)
