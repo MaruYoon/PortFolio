@@ -16,6 +16,8 @@ Item::~Item()
 void Item::Initialize()
 {
 	
+	strKey = "Item";
+
 	 Texture[0] = (char*)"  ";
 
 	 /*

@@ -24,7 +24,7 @@ private:
 	Object* pBackGround;
 	Object* Initem;
 
-	Object* ObjectList[OBJID_MAX][128];
+	//Object* ObjectList[OBJID_MAX][128];
 
     Object* InRoom[9];
 	Object* BackDoor[9];

@@ -12,6 +12,8 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
+	strKey = "Enemy";
+	
 	Texture[0][0][0] = (char*)" __{ )";
 	Texture[0][0][1] = (char*)"' '£þ)";
 	Texture[0][0][2] = (char*)"   / |";

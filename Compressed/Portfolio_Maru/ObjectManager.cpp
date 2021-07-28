@@ -37,8 +37,11 @@ Transform* ObjectManager::GetTopPlayer()
 
 void ObjectManager::Initialize()
 {
-	
-	map<string,<>
+
+	Object* pObject;
+
+	AddObject(pObject->GetKey(Player));
+
 
 	//스테이지 1
 	pBackGround = ObjectFactory<BackGround>::CreateObject();
@@ -64,6 +67,11 @@ void ObjectManager::Initialize()
 
 	for (int i = 0; i < 128; ++i)
 	{
+
+		ObjectList.insert(ObjectFactory<Enemy>::CreateObject());
+
+
+
 		ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
 		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
 	}
