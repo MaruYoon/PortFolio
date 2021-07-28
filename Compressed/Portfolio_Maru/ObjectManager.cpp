@@ -69,7 +69,9 @@ void ObjectManager::Initialize()
 
 
 	//스테이지1.
-	AddObject(ObjectFactory<BackGround>::CreateObject());
+	Object* pBackGround = ObjectFactory<BackGround>::CreateObject();
+
+	//pBackGround = ObjectManager::Getinstance().
 
 	//스테이지2.
 	for (int i = 0; i < 9; ++i)
@@ -105,7 +107,9 @@ void ObjectManager::Initialize()
 
 void ObjectManager::Update()
 {
-	
+
+
+
 	/*
 	for (int i = 0; i < OBJID_MAX; ++i)
 	{
@@ -147,11 +151,12 @@ void ObjectManager::Update()
 		}
 	}*/
 
+	map<string, list<Object*>>::iterator iterEnemy = ObjectList.find("Enemy");
+
+
 
 	for (int i = 0; i < 128; ++i)
 	{
-		ObjectList.find(*Object->GetKey("Enemy"))->first.begin();
-
 
 		if (ObjectList[OBJID_ENEMY][i]->GetActive())
 		{

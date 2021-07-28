@@ -20,6 +20,8 @@ void Door::Initialize()
 	Texture[5] = (char*)"|       |";
 	Texture[6] = (char*)"|_______|";
 
+	strKey = "Door";
+
 	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Scale = Vector3((float)strlen("|       |")/2, 7.0f);
 	

@@ -5,7 +5,8 @@ class Object
 {
 protected:
 	Transform TransInfo;
-	char* Texture[128];
+	vector<char*>Texture;
+	//char* Texture[128];
 	bool Active;
 	int CheckRoom;
 	string strKey;

@@ -59,6 +59,19 @@ public:
 	bool GetCheckMission() const { return _CheckMission; }
 	void SetCheckMission(const bool& m_CheckMission) { _CheckMission = m_CheckMission; }
 
+	/*
+	*/
+	list<Object*>*GetObjectList(string _strKey)
+	{
+		map<string, list<Object*>>::iterator iter = ObjectList.find(_strKey);
+
+		if (iter == ObjectList.end())
+			return NULL;
+
+
+
+	}
+
 
 	//지정주석 처리 ctrl + k + C
 	//지정주석 해제 ctrl + k + U

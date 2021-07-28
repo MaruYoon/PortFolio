@@ -41,12 +41,14 @@ void CheckMission::Initialize()
 	pPaper[24].Texture = (char*)"    |   /                                                   / ";
 	pPaper[25].Texture = (char*)"    ¡¬_/___________________________________________________/  ";
 
+	vector<char*>::push_back()
+
 	for (int i = 0; i < 26; ++i)
 	{
 		pPaper[i].TransPos.Position = Vector3(4.0f, 2.0f);
 	}
 
-
+	strKey = "CheckMission";
 
 
 	pCheck[0].Texture = (char*)"GOT IT!!";

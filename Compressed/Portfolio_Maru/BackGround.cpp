@@ -12,7 +12,7 @@ BackGround::~BackGround()
 
 void BackGround::Initialize()
 {
-
+	strKey = "BackGround";
 }
 
 int BackGround::Update()
