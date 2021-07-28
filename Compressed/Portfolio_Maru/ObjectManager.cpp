@@ -38,7 +38,7 @@ Transform* ObjectManager::GetTopPlayer()
 void ObjectManager::Initialize()
 {
 
-
+	/*
 	//스테이지 1
 	pBackGround = ObjectFactory<BackGround>::CreateObject();
 
@@ -55,19 +55,41 @@ void ObjectManager::Initialize()
 	Initem = ObjectFactory<Item>::CreateObject();
 	
 	pCheckMission = ObjectFactory<CheckMission>::CreateObject();
+	*/
+
+
+
+	//스테이지1.
+	AddObject(ObjectFactory<BackGround>::CreateObject());
+
+	//스테이지2.
+	for (int i = 0; i < 9; ++i)
+	{
+		AddObject(ObjectFactory<Room>::CreateObject());
+	}
+
+	//탑플레이어
+	AddObject(ObjectFactory<TopPlayer>::CreateObject());
+
+	//아이템
+	AddObject(ObjectFactory<Item>::CreateObject());
+
+	//미션창
+	AddObject(ObjectFactory<CheckMission>::CreateObject());
 
 	CreatDoor();
 	CreatExit();
 
+	//적
+	AddObject(ObjectFactory<Enemy>::CreateObject());
 
-
+	/*
 	for (int i = 0; i < 128; ++i)
 	{
-		AddObject(ObjectFactory<Enemy>::CreateObject());
-
-		//ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
-		//ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
+		ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
+		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
 	}
+	*/
 
 	EnemyCount = 0;
 	CheckInRoom = false;
@@ -81,6 +103,10 @@ void ObjectManager::Initialize()
 
 void ObjectManager::Update()
 {
+	
+
+
+
 	for (int i = 0; i < OBJID_MAX; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
@@ -88,7 +114,7 @@ void ObjectManager::Update()
 			int iResult = 0;
 
 			if(!CheckInRoom)
-				if (ObjectList.find(Object::GetKey(Enemy))->GetActive())
+				if (ObjectList.find(Object::GetKey("Enemy"))->GetActive())
 					iResult = ObjectList[i][j]->Update();
 
 			if (iResult == 1)
@@ -124,7 +150,8 @@ void ObjectManager::Update()
 
 	for (int i = 0; i < 128; ++i)
 	{
-		ObjectList.find("Enemy")->first.begin();
+		ObjectList.find(*Object->GetKey("Enemy"))->first.begin();
+
 
 		if (ObjectList[OBJID_ENEMY][i]->GetActive())
 		{
@@ -355,7 +382,7 @@ void ObjectManager::CreatDoor()
 	//객실문
 	for (int i = 0; i < 9; ++i)
 	{
-		BackDoor[i] = ObjectFactory<Door>::CreateObject();
+		AddObject(ObjectFactory<Door>::CreateObject());
 	}
 
 	BackDoor[0]->SetPosition(12.0f, 8.0f);
@@ -381,7 +408,7 @@ void ObjectManager::CreatExit()
 	//비상계단
 	for (int i = 0; i < 3; ++i)
 	{
-		BackExit[i] = ObjectFactory<Exit>::CreateObject();
+		AddObject(ObjectFactory<Exit>::CreateObject());
 	}
 
 	BackExit[0]->SetPosition(105.0f, 8.0f);
