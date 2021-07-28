@@ -107,6 +107,7 @@ void ObjectManager::Update()
 
 
 
+	/*
 	for (int i = 0; i < OBJID_MAX; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
@@ -114,7 +115,7 @@ void ObjectManager::Update()
 			int iResult = 0;
 
 			if(!CheckInRoom)
-				if (ObjectList.find(Object::GetKey("Enemy"))->GetActive())
+				if (ObjectList[i][j])->GetActive())
 					iResult = ObjectList[i][j]->Update();
 
 			if (iResult == 1)
@@ -126,7 +127,7 @@ void ObjectManager::Update()
 		}
 	}
 
-	/*for (int i = 0; i < 128; ++i)
+	for (int i = 0; i < 128; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
 		{
