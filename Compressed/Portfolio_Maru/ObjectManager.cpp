@@ -38,10 +38,6 @@ Transform* ObjectManager::GetTopPlayer()
 void ObjectManager::Initialize()
 {
 
-	Object* pObject;
-
-	AddObject(pObject->GetKey(Player));
-
 
 	//스테이지 1
 	pBackGround = ObjectFactory<BackGround>::CreateObject();
@@ -67,13 +63,10 @@ void ObjectManager::Initialize()
 
 	for (int i = 0; i < 128; ++i)
 	{
+		AddObject(ObjectFactory<Enemy>::CreateObject());
 
-		ObjectList.insert(ObjectFactory<Enemy>::CreateObject());
-
-
-
-		ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
-		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
+		//ObjectList[OBJID_ENEMY][i] = ObjectFactory<Enemy>::CreateObject();
+		//ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
 	}
 
 	EnemyCount = 0;
@@ -95,7 +88,7 @@ void ObjectManager::Update()
 			int iResult = 0;
 
 			if(!CheckInRoom)
-				if (ObjectList[i][j]->GetActive())
+				if (ObjectList.find(Object::GetKey(Enemy))->GetActive())
 					iResult = ObjectList[i][j]->Update();
 
 			if (iResult == 1)
@@ -107,7 +100,7 @@ void ObjectManager::Update()
 		}
 	}
 
-	for (int i = 0; i < 128; ++i)
+	/*for (int i = 0; i < 128; ++i)
 	{
 		for (int j = 0; j < 128; ++j)
 		{
@@ -126,11 +119,13 @@ void ObjectManager::Update()
 				}
 			}
 		}
-	}
+	}*/
 
 
 	for (int i = 0; i < 128; ++i)
 	{
+		ObjectList.find("Enemy")->first.begin();
+
 		if (ObjectList[OBJID_ENEMY][i]->GetActive())
 		{
 			if (CollisionManager::CollisionRact(
