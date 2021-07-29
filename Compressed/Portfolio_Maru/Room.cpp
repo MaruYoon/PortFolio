@@ -14,6 +14,9 @@ Room::~Room()
 
 void Room::Initialize()
 {
+
+	strKey = "Room";
+
 	for (int y = 0; y < 25; ++y)
 	{
 		for (int x = 0; x < 46; ++x)

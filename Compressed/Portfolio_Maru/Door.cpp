@@ -12,6 +12,7 @@ Door::~Door()
 
 void Door::Initialize()
 {
+
 	Texture[0] = (char*)" _______ ";
 	Texture[1] = (char*)"|       |";
 	Texture[2] = (char*)"|       |";

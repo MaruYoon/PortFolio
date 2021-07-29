@@ -68,10 +68,7 @@ public:
 		if (iter == ObjectList.end())
 			return NULL;
 
-
-
 	}
-
 
 	//지정주석 처리 ctrl + k + C
 	//지정주석 해제 ctrl + k + U
@@ -100,7 +97,7 @@ public:
 	void CreatDoor();
 	void CreatExit();
 	void CreateEnemy();
-    void FireBullet(int _index);
+    //void FireBullet(int _index);
 	void AddObject(Object* _object);
 	
 

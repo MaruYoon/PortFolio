@@ -23,7 +23,7 @@ void Exit::Initialize()
 	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Scale = Vector3((float)strlen("|       |       |")/2, 8.0f);
 
-
+	strKey = "Exit";
 }
 
 int Exit::Update()

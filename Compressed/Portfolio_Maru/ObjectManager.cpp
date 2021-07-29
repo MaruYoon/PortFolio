@@ -30,12 +30,6 @@ ObjectManager::~ObjectManager()
 	Release();
 }
 
-Transform* ObjectManager::GetTopPlayer()
-{
-	return pTopPlayer->GetTransform();
-
-
-}
 
 void ObjectManager::Initialize()
 {
@@ -69,7 +63,7 @@ void ObjectManager::Initialize()
 
 
 	//스테이지1.
-	Object* pBackGround = ObjectFactory<BackGround>::CreateObject();
+	AddObject(ObjectFactory<BackGround>::CreateObject());
 
 	//pBackGround = ObjectManager::Getinstance().
 
@@ -77,6 +71,11 @@ void ObjectManager::Initialize()
 	for (int i = 0; i < 9; ++i)
 	{
 		AddObject(ObjectFactory<Room>::CreateObject());
+	}
+
+	for (int i = 0; i < 9; ++i)
+	{
+		AddObject(ObjectFactory<Door>::CreateObject());
 	}
 
 	//탑플레이어
@@ -151,79 +150,168 @@ void ObjectManager::Update()
 		}
 	}*/
 
-	map<string, list<Object*>>::iterator iterEnemy = ObjectList.find("Enemy");
 
+	//list<Object*>::iterator iterEnemy = (*ObjectList.find("Enemy")).second.begin();
+
+	/*
+
+	//1
+	//이렇게 찾으려고 한다면
+	map<string, list<Object*>>::iterator iterEnemy = ObjectList.find("Enemy");
+	map<string, list<Object*>>::iterator iterPlayer = ObjectList.find("Player");
+
+
+	//아래의 내용처럼 조건이 갖추어져 있어야 한다.
+	if (iterEnemy == ObjectList.end())
+		return;
+
+	if (iterPlayer == ObjectList.end())
+		return;
+
+
+	아니라면 GetObjectList같은 함수를 생성하여 사용하는 것이 좋다. 
+	이 방법이 가장 효율적인 방법
+
+	list<Object*>* pEnemyList = GetObjectList("Enemy");
+	list<Object*>* pPlayerList = GetObjectList("Player");
+	list<Object*>* pDoor = GetObjectList("Door");
+
+	*/
+
+
+	/*
+	if (pEnemyList)
+	{
+		pEnemyList->front();
+	}
+	if (pPlayerList)
+	{
+		pPlayerList->front();
+	}
+	*/
+
+
+	/*
+	
+
+	//2
+	list<Object*>::iterator iterPlayer = (*ObjectList.find("Player")).second.begin();
+
+	//3
+	list<Object*>::iterator iterEnemy =  GetObjectList("Enemy")->begin();
+
+	//4
+	Enemy* pEnemy;
+	list<Object*>::iterator iterEnemy = (*ObjectList.find(pEnemy->GetKey())).second.begin();
+
+	(*iterEnemy)->GetTransform();
+
+	*/
+
+    list<Object*>* pEnemyList = GetObjectList("Enemy");
+    list<Object*>* pPlayerList = GetObjectList("Player");
+   
 
 
 	for (int i = 0; i < 128; ++i)
 	{
-
-		if (ObjectList[OBJID_ENEMY][i]->GetActive())
+		if (pEnemyList&&pPlayerList)
 		{
-			if (CollisionManager::CollisionRact(
-				*ObjectList[OBJID_ENEMY][i]->GetTransform(),
-				*pPlayer->GetTransform()))
+			pEnemyList->front();
+			pPlayerList->front();
+
+			if ((pEnemyList)->front()->GetActive())
 			{
-				if (GetAsyncKeyState(VK_CONTROL))
+				if (CollisionManager::CollisionRact(
+					*(pEnemyList)->front()->GetTransform(), *(pPlayerList)->front()->GetTransform()))
 				{
-					break;
+					if (GetAsyncKeyState(VK_CONTROL))
+					{
+						break;
+					}
+					else
+					{
+						SceneManager::Getinstance()->SetScene(SCENEID_EXIT);
+					}
+					(pEnemyList)->front()->SetActive(false);
 				}
-				else
-				{
-					SceneManager::Getinstance()->SetScene(SCENEID_EXIT);
-				}
-				ObjectList[OBJID_ENEMY][i]->SetActive(false);
 			}
 		}
+
 	}
 
 
 	ULONG ulKey = InputManager::Getinstance()->GetKey();
 
+	list<Object*>* pDoorList = GetObjectList("Door");
+	list<Object*>* pTopPlayerList = GetObjectList("TopPlayer");
+	list<Object*>* pItemList = GetObjectList("Item");
+
 	for (int i = 0; i < 9; ++i)
 	{
-		if (CollisionManager::CollisionRact(
-			*BackDoor[i]->GetTransform(),
-			*pPlayer->GetTransform()))
+		if (pDoorList && pTopPlayerList && pItemList && pPlayerList)
 		{
-			if (ulKey & KEYID_UP)
-			{
-				CheckInRoom = true;
-				RoomIndex = i;
+			pDoorList->front();
+			pTopPlayerList->front();
+			pItemList->front();
+			pPlayerList->front();
 
-				pTopPlayer->Initialize();
-				Initem->Initialize();
+			if (CollisionManager::CollisionRact(
+				*(pDoorList)->front()->GetTransform(), *(pPlayerList)->front()->GetTransform()))
+			{
+				if (ulKey & KEYID_UP)
+				{
+					CheckInRoom = true;
+					RoomIndex = i;
+
+					(pTopPlayerList)->front()->Initialize();
+					(pItemList)->front()->Initialize();
+				}
 			}
 		}
 	}
-
+	
 	/*
 	map<string, list<Object*>>::iterator iter = ObjectList.find("Enemy");
 
 	if (iter == ObjectList.end())
 		return;
 	*/
+	
+	//find로 키값을 받아 온다고 해도 저 Enemy가 우리가 찾을 Enemy의 키값이라고 장담할수 없다.
+	//Enmey의 키값을 GetKey로 받아와야 한다.
+	
+	list<Object*>* pRoomList = GetObjectList("Room");
 
+	if (pRoomList)
+	{
+		pRoomList->front();
+	}
 
 
 
 	if (CheckInRoom)
 	{
-		InRoom[RoomIndex]->Update();
+		(pRoomList)->front()->Update();
+		(pItemList)->front()->Update();
+		(pTopPlayerList)->front()->Update();
 
-		Initem->Update();
-		pTopPlayer->Update();
-
+		//InRoom[RoomIndex]->Update();
+		//Initem->Update();
+		//pTopPlayer->Update();
 	} 
 
 	else
 	{
-		pPlayer->Update();
+		(pPlayerList)->front()->Update();
+		//pPlayer->Update();
 	}
 
 	for (int i = 0; i < 3; ++i)
 	{
 		if (CollisionManager::CollisionRact(
+
+
 			*BackExit[i]->GetTransform(),
 			*pPlayer->GetTransform()))
 		{
@@ -420,7 +508,9 @@ void ObjectManager::CreatExit()
 
 void ObjectManager::CreateEnemy()
 {
-	ObjectList[OBJID_ENEMY][EnemyCount]->Initialize();
+	Object* pEnemy = 
+
+
 
 	int Index = EnemyCount % 3;
 	// Index = 0,1,2
@@ -471,7 +561,7 @@ void ObjectManager::CreateEnemy()
 	++EnemyCount;
 }
 
-
+/*
 void ObjectManager::FireBullet(int _index)
 {
 	for (int i = 0; i < 128; ++i)
@@ -488,7 +578,7 @@ void ObjectManager::FireBullet(int _index)
 		}
 	}
 }
-
+*/
 
 void ObjectManager::AddObject(Object* _object)
 {
@@ -508,6 +598,13 @@ void ObjectManager::AddObject(Object* _object)
 	}
 }
 
+Transform* ObjectManager::GetTopPlayer()
+{
+
+
+	return pTopPlayer->GetTransform();
+
+}
 
 
 
