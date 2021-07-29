@@ -197,6 +197,16 @@ void ObjectManager::Update()
 		}
 	}
 
+	/*
+	map<string, list<Object*>>::iterator iter = ObjectList.find("Enemy");
+
+	if (iter == ObjectList.end())
+		return;
+	*/
+
+
+
+
 	if (CheckInRoom)
 	{
 		InRoom[RoomIndex]->Update();
@@ -383,26 +393,21 @@ void ObjectManager::Release()
 void ObjectManager::CreatDoor()
 {
 	//객실문
-	for (int i = 0; i < 9; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
-		AddObject(ObjectFactory<Door>::CreateObject());
-	}
+		Object* pDoor1 = ObjectFactory<Door>::CreateObject(12.0f, 8.0f + (i * 10));
+		((Door*)pDoor1)->SetIndex(i * 3 + 1);
+		AddObject(pDoor1);
 
-	BackDoor[0]->SetPosition(12.0f, 8.0f);
-	BackDoor[1]->SetPosition(42.0f, 8.0f);
-	BackDoor[2]->SetPosition(72.0f, 8.0f);
 
-	BackDoor[3]->SetPosition(12.0f, 18.0f);
-	BackDoor[4]->SetPosition(42.0f, 18.0f);
-	BackDoor[5]->SetPosition(72.0f, 18.0f);
-	 
-	BackDoor[6]->SetPosition(12.0f, 28.0f);
-	BackDoor[7]->SetPosition(42.0f, 28.0f);
-	BackDoor[8]->SetPosition(72.0f, 28.0f);
+		Object* pDoor2 = ObjectFactory<Door>::CreateObject(42.0f, 8.0f + (i * 10));
+		((Door*)pDoor2)->SetIndex(i * 3 + 2);
+		AddObject(pDoor2);
 
-	for (int i = 0; i < 9; ++i)
-	{
-		((Door*)BackDoor[i])->SetIndex(i);
+
+		Object* pDoor3 = ObjectFactory<Door>::CreateObject(72.0f, 8.0f + (i * 10));
+		((Door*)pDoor3)->SetIndex(i * 3 + 3);
+		AddObject(pDoor3);
 	}
 }
 
@@ -410,14 +415,7 @@ void ObjectManager::CreatExit()
 {
 	//비상계단
 	for (int i = 0; i < 3; ++i)
-	{
-		AddObject(ObjectFactory<Exit>::CreateObject());
-	}
-
-	BackExit[0]->SetPosition(105.0f, 8.0f);
-	BackExit[1]->SetPosition(105.0f, 18.0f);
-	BackExit[2]->SetPosition(105.0f, 28.0f);
-
+		AddObject(ObjectFactory<Exit>::CreateObject(105.0f, 8.0f + (i * 10) ) );
 }
 
 void ObjectManager::CreateEnemy()
