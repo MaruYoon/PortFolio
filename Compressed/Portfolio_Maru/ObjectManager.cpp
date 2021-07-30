@@ -208,10 +208,17 @@ void ObjectManager::Update()
 
 	*/
 
-    list<Object*>* pEnemyList = GetObjectList("Enemy");
-    list<Object*>* pPlayerList = GetObjectList("Player");
-   
 
+    //list<Object*>* pEnemyList = GetObjectList("Enemy");
+    //list<Object*>* pPlayerList = GetObjectList("Player");
+	//list<Object*>* pDoorList = GetObjectList("Door");
+	//list<Object*>* pExitList = GetObjectList("Exit");
+	//list<Object*>* pTopPlayerList = GetObjectList("TopPlayer");
+	//list<Object*>* pItemList = GetObjectList("Item");
+	//list<Object*>* pRoomList = GetObjectList("Room");
+	//list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
+
+	         
 
 	for (int i = 0; i < 128; ++i)
 	{
@@ -237,15 +244,11 @@ void ObjectManager::Update()
 				}
 			}
 		}
-
 	}
 
 
 	ULONG ulKey = InputManager::Getinstance()->GetKey();
 
-	list<Object*>* pDoorList = GetObjectList("Door");
-	list<Object*>* pTopPlayerList = GetObjectList("TopPlayer");
-	list<Object*>* pItemList = GetObjectList("Item");
 
 	for (int i = 0; i < 9; ++i)
 	{
@@ -281,7 +284,6 @@ void ObjectManager::Update()
 	//find로 키값을 받아 온다고 해도 저 Enemy가 우리가 찾을 Enemy의 키값이라고 장담할수 없다.
 	//Enmey의 키값을 GetKey로 받아와야 한다.
 	
-	list<Object*>* pRoomList = GetObjectList("Room");
 	
 
 	if (pRoomList)
@@ -306,9 +308,6 @@ void ObjectManager::Update()
 		//pPlayer->Update();
 	}
 
-
-	list<Object*>* pExitList = GetObjectList("Exit");
-	list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
 
 	if (pExitList && pCheckMissionList)
 	{
@@ -437,30 +436,39 @@ void ObjectManager::Render()
 
 #else
 
+	//list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
+	//list<Object*>* pRoomList = GetObjectList("Room");
+	//list<Object*>* pBackGroundList = GetObjectList("BackGround");
+	//list<Object*>* pDoorList = GetObjectList("Door");
+	//list<Object*>* pExitList = GetObjectList("Exit");
+	//list<Object*>* pPlayerList = GetObjectList("Player");
+
 	if (CheckInRoom)
 	{
-		pRoomList
-
-			 
+		pRoomList->front()->Render();
 		//InRoom[RoomIndex]->Render();  
 	}
 
 	else if (_CheckMission)
 	{
-		pCheckMission->Render();
+		(pCheckMissionList)->front()->Render();
 	}
 
 	else
 	{
-		pBackGround->Render();
+		pBackGroundList->front()->Render();
 
 		for (int i = 0; i < 9; ++i)
-			BackDoor[i]->Render();
+			pDoorList->front()->Render();
 
 		for (int i = 0; i < 3; ++i)
-			BackExit[i]->Render();
+			pExitList->front()->Render();
 
-		pPlayer->Render();
+
+		pPlayerList->front()->Render();
+		//pPlayer->Render();
+
+
 
 		for (int i = 0; i < OBJID_MAX; ++i)
 		{
@@ -473,13 +481,12 @@ void ObjectManager::Render()
 	}
 	
 
-
 #endif
 }
 
 void ObjectManager::Release()
 {
-	SAFE_RELEASE(pPlayer);
+	SAFE_RELEASE(pPlayerList);
 
 	for (int i = 0; i < OBJID_MAX; ++i)
 		for (int j = 0; j < 128; ++j)
@@ -517,9 +524,6 @@ void ObjectManager::CreatExit()
 
 void ObjectManager::CreateEnemy()
 {
-	Object* pEnemy = 
-
-
 
 	int Index = EnemyCount % 3;
 	// Index = 0,1,2
@@ -607,17 +611,22 @@ void ObjectManager::AddObject(Object* _object)
 	}
 }
 
-void ObjectManager::FindObject()
-{
-}
 
 Transform* ObjectManager::GetTopPlayer()
 {
-
-
-	return pTopPlayer->GetTransform();
-
+	return pTopPlayerList->front()->GetTransform();
 }
 
+void ObjectManager::FindObject()
+{
+	list<Object*>* pEnemyList = GetObjectList("Enemy");
+	list<Object*>* pPlayerList = GetObjectList("Player");
+	list<Object*>* pDoorList = GetObjectList("Door");
+	list<Object*>* pExitList = GetObjectList("Exit");
+	list<Object*>* pTopPlayerList = GetObjectList("TopPlayer");
+	list<Object*>* pItemList = GetObjectList("Item");
+	list<Object*>* pRoomList = GetObjectList("Room");
+	list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
+}
 
 

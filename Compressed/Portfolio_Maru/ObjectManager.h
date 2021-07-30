@@ -99,7 +99,20 @@ public:
 	void CreateEnemy();
     //void FireBullet(int _index);
 	void AddObject(Object* _object);
+	void FindObject();
  
+public:
+	list<Object*>* pEnemyList = GetObjectList("Enemy");
+	list<Object*>* pPlayerList = GetObjectList("Player");
+	list<Object*>* pDoorList = GetObjectList("Door");
+	list<Object*>* pExitList = GetObjectList("Exit");
+	list<Object*>* pTopPlayerList = GetObjectList("TopPlayer");
+	list<Object*>* pItemList = GetObjectList("Item");
+	list<Object*>* pRoomList = GetObjectList("Room");
+	list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
+	list<Object*>* pBackGroundList = GetObjectList("BackGround");
+
+
 
 private:
 	ObjectManager();
