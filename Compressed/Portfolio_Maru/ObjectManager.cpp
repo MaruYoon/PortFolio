@@ -282,11 +282,10 @@ void ObjectManager::Update()
 	//Enmey의 키값을 GetKey로 받아와야 한다.
 	
 	list<Object*>* pRoomList = GetObjectList("Room");
+	
 
 	if (pRoomList)
-	{
 		pRoomList->front();
-	}
 
 
 
@@ -307,21 +306,32 @@ void ObjectManager::Update()
 		//pPlayer->Update();
 	}
 
+
+	list<Object*>* pExitList = GetObjectList("Exit");
+	list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
+
+	if (pExitList && pCheckMissionList)
+	{
+		pExitList->front();
+		pCheckMissionList->front();
+	}
+
+
+
+
 	for (int i = 0; i < 3; ++i)
 	{
 		if (CollisionManager::CollisionRact(
-
-
-			*BackExit[i]->GetTransform(),
-			*pPlayer->GetTransform()))
+			*(pExitList)->front()->GetTransform(),
+			*(pPlayerList)->front()->GetTransform()))
 		{
 			if (ulKey & KEYID_DOWN)
 			{
-				if (pPlayer->GetPosition().y < 27.0f)
+				if (pPlayerList->front()->GetPosition().y < 27.0f)
 				{
-					pPlayer->SetPosition(
-						pPlayer->GetPosition().x,
-						pPlayer->GetPosition().y + 10.0f);
+					(pPlayerList)->front()->SetPosition(
+						(pPlayerList)->front()->GetPosition().x,
+						(pPlayerList)->front()->GetPosition().y + 10.0f);
 
 					break;
 				}
@@ -333,11 +343,11 @@ void ObjectManager::Update()
 
 			if (ulKey & KEYID_UP)
 			{
-				if (pPlayer->GetPosition().y > 7.0f)
+				if ((pPlayerList)->front()->GetPosition().y > 7.0f)
 				{
-					pPlayer->SetPosition(
-						pPlayer->GetPosition().x,
-						pPlayer->GetPosition().y - 10.0f);
+					(pPlayerList)->front()->SetPosition(
+						(pPlayerList)->front()->GetPosition().x,
+						(pPlayerList)->front()->GetPosition().y - 10.0f);
 
 					break;
 				}
@@ -353,11 +363,11 @@ void ObjectManager::Update()
 	if (ulKey & KEYID_ESCAPE)
 	{
 		_CheckMission = true;
-		pCheckMission->Initialize();
+		(pCheckMissionList)->front()->Initialize();
 	}
 	if (_CheckMission)
 	{
-		pCheckMission->Update();
+		(pCheckMissionList)->front()->Update();
 	}
 
 
@@ -429,11 +439,10 @@ void ObjectManager::Render()
 
 	if (CheckInRoom)
 	{
-		InRoom[RoomIndex]->Render();
+		pRoomList
 
-		pTopPlayer->Render();
-		Initem->Render();
-
+			 
+		//InRoom[RoomIndex]->Render();  
 	}
 
 	else if (_CheckMission)
@@ -596,6 +605,10 @@ void ObjectManager::AddObject(Object* _object)
 	{
 		iter->second.push_back(_object);
 	}
+}
+
+void ObjectManager::FindObject()
+{
 }
 
 Transform* ObjectManager::GetTopPlayer()

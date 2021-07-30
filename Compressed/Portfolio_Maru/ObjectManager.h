@@ -99,7 +99,7 @@ public:
 	void CreateEnemy();
     //void FireBullet(int _index);
 	void AddObject(Object* _object);
-	
+ 
 
 private:
 	ObjectManager();
