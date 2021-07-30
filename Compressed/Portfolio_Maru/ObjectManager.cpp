@@ -33,7 +33,6 @@ ObjectManager::~ObjectManager()
 
 void ObjectManager::Initialize()
 {
-
 	/*
 	//스테이지 1
 	pBackGround = ObjectFactory<BackGround>::CreateObject();
@@ -60,7 +59,6 @@ void ObjectManager::Initialize()
 		ObjectList[OBJID_BULLET][i] = ObjectFactory<Bullet>::CreateObject();
 	}
 	*/
-
 
 	//스테이지1.
 	AddObject(ObjectFactory<BackGround>::CreateObject());
@@ -107,8 +105,6 @@ void ObjectManager::Initialize()
 void ObjectManager::Update()
 {
 
-
-
 	/*
 	for (int i = 0; i < OBJID_MAX; ++i)
 	{
@@ -125,7 +121,6 @@ void ObjectManager::Update()
 
 			if (iResult == -1)
 				--EnemyCount;
-
 		}
 	}
 
@@ -149,7 +144,6 @@ void ObjectManager::Update()
 			}
 		}
 	}*/
-
 
 	//list<Object*>::iterator iterEnemy = (*ObjectList.find("Enemy")).second.begin();
 
@@ -178,7 +172,6 @@ void ObjectManager::Update()
 
 	*/
 
-
 	/*
 	if (pEnemyList)
 	{
@@ -190,10 +183,8 @@ void ObjectManager::Update()
 	}
 	*/
 
-
 	/*
 	
-
 	//2
 	list<Object*>::iterator iterPlayer = (*ObjectList.find("Player")).second.begin();
 
@@ -208,7 +199,6 @@ void ObjectManager::Update()
 
 	*/
 
-
     //list<Object*>* pEnemyList = GetObjectList("Enemy");
     //list<Object*>* pPlayerList = GetObjectList("Player");
 	//list<Object*>* pDoorList = GetObjectList("Door");
@@ -217,8 +207,6 @@ void ObjectManager::Update()
 	//list<Object*>* pItemList = GetObjectList("Item");
 	//list<Object*>* pRoomList = GetObjectList("Room");
 	//list<Object*>* pCheckMissionList = GetObjectList("CheckMission");
-
-	         
 
 	for (int i = 0; i < 128; ++i)
 	{
@@ -246,9 +234,7 @@ void ObjectManager::Update()
 		}
 	}
 
-
 	ULONG ulKey = InputManager::Getinstance()->GetKey();
-
 
 	for (int i = 0; i < 9; ++i)
 	{
@@ -284,12 +270,8 @@ void ObjectManager::Update()
 	//find로 키값을 받아 온다고 해도 저 Enemy가 우리가 찾을 Enemy의 키값이라고 장담할수 없다.
 	//Enmey의 키값을 GetKey로 받아와야 한다.
 	
-	
-
 	if (pRoomList)
 		pRoomList->front();
-
-
 
 	if (CheckInRoom)
 	{
@@ -308,15 +290,11 @@ void ObjectManager::Update()
 		//pPlayer->Update();
 	}
 
-
 	if (pExitList && pCheckMissionList)
 	{
 		pExitList->front();
 		pCheckMissionList->front();
 	}
-
-
-
 
 	for (int i = 0; i < 3; ++i)
 	{
@@ -358,7 +336,6 @@ void ObjectManager::Update()
 		}
 	}
 	
-
 	if (ulKey & KEYID_ESCAPE)
 	{
 		_CheckMission = true;
@@ -368,10 +345,6 @@ void ObjectManager::Update()
 	{
 		(pCheckMissionList)->front()->Update();
 	}
-
-
-
-
 
 }
 
@@ -468,8 +441,18 @@ void ObjectManager::Render()
 		pPlayerList->front()->Render();
 		//pPlayer->Render();
 
+		for (map<string, list<Object*>>::iterator iter = ObjectList.begin();
+			iter != ObjectList.end(); ++iter)
+		{
+			for (list<Object*>::iterator iter2 = iter->second.begin();
+				iter2 != iter->second.end(); ++iter2)
+			{
+				if ((*iter2)->GetActive())
+					(*iter2)->Render();
+			}
+		}
 
-
+		/*
 		for (int i = 0; i < OBJID_MAX; ++i)
 		{
 			for (int j = 0; j < 128; ++j)
@@ -478,21 +461,33 @@ void ObjectManager::Render()
 					ObjectList[i][j]->Render();
 			}
 		}
+		*/
 	}
-	
 
 #endif
 }
 
 void ObjectManager::Release()
 {
+
 	SAFE_RELEASE(pPlayerList);
 
-	for (int i = 0; i < OBJID_MAX; ++i)
-		for (int j = 0; j < 128; ++j)
-			SAFE_RELEASE(ObjectList[i][j]);
-}
 
+	for (map<string, list<Object*>>::iterator iter = ObjectList.begin();
+		iter != ObjectList.end(); ++iter)
+	{
+		for (list<Object*>::iterator iter2 = iter->second.begin();
+			iter2 != iter->second.end(); ++iter2)
+		{
+			SAFE_RELEASE(*iter2);
+		}
+	}
+
+	//for (int i = 0; i < OBJID_MAX; ++i)
+	//	for (int j = 0; j < 128; ++j)
+	//		SAFE_RELEASE(ObjectList[i][j]);
+
+}
 
 void ObjectManager::CreatDoor()
 {
@@ -524,7 +519,6 @@ void ObjectManager::CreatExit()
 
 void ObjectManager::CreateEnemy()
 {
-
 	int Index = EnemyCount % 3;
 	// Index = 0,1,2
 	int Horizontal = rand() % 2;
@@ -611,6 +605,23 @@ void ObjectManager::AddObject(Object* _object)
 	}
 }
 
+//
+// 
+//template <typename T>
+//void ObjectManager::InsertList(const int& _count, const string& _strKey)
+//{
+//	list<Object*> pTempList;
+//
+//	for (int i = 0; i < _count; ++i)
+//	{
+//		Object* pObject = ObjectFactory<T>::CreateObject();
+//		pTempList.push_back(pObject);
+//	}
+//
+//	ObjectList.insert(make_pair(_strKey, pTempList));
+// 
+// if()
+//}
 
 Transform* ObjectManager::GetTopPlayer()
 {

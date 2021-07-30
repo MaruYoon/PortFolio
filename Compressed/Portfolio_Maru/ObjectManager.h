@@ -60,7 +60,10 @@ public:
 	void SetCheckMission(const bool& m_CheckMission) { _CheckMission = m_CheckMission; }
 
 	/*
+	template <typename T>
+	void InsertList(const int& _count, const string& _strKey);
 	*/
+
 	list<Object*>*GetObjectList(string _strKey)
 	{
 		map<string, list<Object*>>::iterator iter = ObjectList.find(_strKey);
