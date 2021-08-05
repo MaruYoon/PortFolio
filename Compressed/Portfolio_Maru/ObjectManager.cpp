@@ -452,6 +452,7 @@ void ObjectManager::Render()
 			}
 		}
 
+
 		/*
 		for (int i = 0; i < OBJID_MAX; ++i)
 		{
