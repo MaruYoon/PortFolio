@@ -525,6 +525,9 @@ void ObjectManager::CreateEnemy()
 	int Horizontal = rand() % 2;
 	//horizontal = 0,1
 
+	Enemy* pEnemy;
+
+
 	((Enemy*)ObjectList[OBJID_ENEMY][EnemyCount])->SetIndex(Index);
 	((Enemy*)ObjectList[OBJID_ENEMY][EnemyCount])->SetHorizontal(Horizontal);
 
