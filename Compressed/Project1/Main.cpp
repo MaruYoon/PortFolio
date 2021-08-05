@@ -24,6 +24,10 @@ list<StudentInfo> StudentList;
 
 
 void LoadDate();
+void ScoreSwap(StudentInfo& _A, StudentInfo& _B);
+void KorSort();
+void EngSort();
+void MathSort();
 
 int main(void)
 {
@@ -43,18 +47,22 @@ int main(void)
 	//** 읽어온 데이터를 각각의 점수에 따라 내림차순 정렬을 할것이다.
 	//** 국어, 영어, 수학 점수별로 선택한 후 선택된 과목의 점수를 내림차순 정렬할것.
 
+
+
+
 	while (true)
 	{
+
+		cout << "**학생 성적 관리**" << endl << endl;
 		cout << "1.전체 점수 출력" << endl;
 		cout << "2.지정 점수 정렬" << endl;
 		cout << "3.종          료" << endl << endl;
 
 
 		int Num;
-		cout << "입력 : ";
-		cin >> Num;
+		cout << "입력 : "; cin >> Num;
+		cout << endl;
 
-		system("cls");
 
 
 		switch (Num)
@@ -72,6 +80,7 @@ int main(void)
 
 		case 2:
 
+			cout << "**정렬 기준을 선택하세요**" << endl << endl;
 			cout << "1.국어 정렬" << endl;
 			cout << "2.영어 정렬" << endl;
 			cout << "3.수학 정렬" << endl << endl;
@@ -83,59 +92,27 @@ int main(void)
 			switch (num)
 			{
 			case 1:
-				
-				for (list<StudentInfo>::iterator iter = StudentList.begin();
-					iter != StudentList.end(); ++iter)
-				{
-					for (list<StudentInfo>::iterator iter2 = (iter++);
-						iter2 != StudentList.end(); ++iter2)
-					{
-						if ((*iter).Kor < (*iter2).Kor)
-						{
-							int Temp = (*iter2).Kor;
-							(*iter).Kor = (*iter).Kor;
-							(*iter).Kor = Temp;
-						}
-					}
-				}
-
-
+				KorSort();
 				break;
 
 			case 2:
-
+				EngSort();
 				break;
 
 			case 3:
-
+				MathSort();
 				break;
 			}
-		
-
-
-
 			break;
 
 		case 3:
-			//for (list<StudentInfo>::iterator iter = StudentList.begin();
-			//	iter != StudentList.end(); ++iter)
-			//{
-			//	cout << iter->Index << " : " << iter->Name << endl;
-			//	cout << "수학 점수 : " << iter->Math < iter->Math << endl << endl;
-			//}
+			exit(NULL);
 			break;
 
 		}
-
+		system("pause");
+		system("cls");
 	}
-
-	
-
-
-
-
-
-
 
 	return 0;
 }
@@ -168,6 +145,65 @@ void LoadDate()
 	//** 파일을 닫는다.
 	fclose(pFileCSV);
 }
+
+
+void ScoreSwap(StudentInfo& _A, StudentInfo& _B)
+{
+	StudentInfo Tmp = _A;
+
+	_A = _B;
+	_B = Tmp;
+}
+
+void KorSort()
+{
+	for (list<StudentInfo>::iterator iter = StudentList.begin();
+		iter != StudentList.end(); ++iter)
+	{
+		for (list<StudentInfo>::iterator iter2 = iter;
+			iter2 != StudentList.end(); ++iter2)
+		{
+			if ((*iter).Kor < (*iter2).Kor)
+			{
+				ScoreSwap((*iter), (*iter2));
+
+			}
+		}
+	}
+}
+
+void EngSort()
+{
+	for (list<StudentInfo>::iterator iter = StudentList.begin();
+		iter != StudentList.end(); ++iter)
+	{
+		for (list<StudentInfo>::iterator iter2 = iter;
+			iter2 != StudentList.end(); ++iter2)
+		{
+			if ((*iter).Eng < (*iter).Eng)
+			{
+				ScoreSwap((*iter), (*iter2));
+			}
+		}
+	}
+}
+
+void MathSort()
+{
+	for (list<StudentInfo>::iterator iter = StudentList.begin();
+		iter != StudentList.end(); ++iter)
+	{
+		for (list<StudentInfo>::iterator iter2 = iter;
+			iter2 != StudentList.end(); ++iter2)
+		{
+			if ((*iter).Math < (*iter).Math)
+			{
+				ScoreSwap((*iter), (*iter2));
+			}
+		}
+	}
+}
+
 
 
 
