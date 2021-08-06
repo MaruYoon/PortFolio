@@ -7,6 +7,10 @@
 #include <fstream>
 #include <Windows.h>
 
+
+// (ª´,.ª³)v
+
+
 using namespace std;
 
 struct StudentInfo
