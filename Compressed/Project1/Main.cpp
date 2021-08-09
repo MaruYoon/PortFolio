@@ -24,17 +24,20 @@ struct StudentInfo
 };
 
 
-//list<StudentInfo*> StudentList;
 
 
 
 void LoadDate();
+void Output();
+
+list<StudentInfo*> StudentList;
+map<int, list<StudentInfo*>>ScoreList;
+
 
 //void ScoreSwap(StudentInfo& _A, StudentInfo& _B);
-void KorSort();
-void EngSort();
-void MathSort();
-void Output();
+//void KorSort();
+//void EngSort();
+//void MathSort();
 
 //string strKey;
 //string GetKey() { return strKey; }
@@ -45,18 +48,58 @@ int main(void)
 {
 	LoadDate();
 
-	map<int, list<StudentInfo>>StudentList;
 
-	
-	
-	
+	list<StudentInfo*>SortList(StudentList);
 
+	{
+		for (list<StudentInfo*>::iterator iter = SortList.begin();
+			iter != SortList.end(); ++iter)
+		{
+			for (list<StudentInfo*>::iterator iter2 = iter;
+				iter2 != SortList.end(); ++iter2)
+			{
+				if ((*iter)->Kor < (*iter2)->Kor)
+				{
+					StudentInfo* pTemp = (*iter);
+					(*iter) = (*iter2);
+					(*iter2) = pTemp;
+				}
+			}
+		}
+		list<StudentInfo*> TempList(SortList);
+		ScoreList.insert(make_pair("Kor", TempList));
+	}
+	
+	
+	{
+		for (list<StudentInfo*>::iterator iter = SortList.begin();
+			iter != SortList.end(); ++iter)
+		{
+			for (list<StudentInfo*>::iterator iter2 = iter;
+				iter != SortList.end(); ++iter2)
+			{
+				if ((*iter)->Eng < (*iter2)->Eng)
+				{
+					StudentInfo* pTemp = (*iter);
+					(*iter) = (*iter2);
+					(*iter2) = pTemp;
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+	/*
 	int Num;
 	cout << "ют╥б : "; cin >> Num;
 	cout << endl;
 
 
-	/*
 	for (list<StudentInfo>::iterator iter = StudentList.begin();
 		iter != StudentList.end(); ++iter)
 	{
