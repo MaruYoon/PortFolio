@@ -135,27 +135,40 @@ void Menu::Render()
 			(int)Trans[i].TransPos.Position.x,
 			(int)Trans[i].TransPos.Position.y + i,
 			Trans[i].Texture);
-
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			(int)Trans[i].TransPos.Position.x,
 			(int)Trans[i].TransPos.Position.y + i,
 			Trans[i].Texture);
+		*/
 	}
 
 	for (int i = 0; i < 10; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			(int)pTitle[i].TransPos.Position.x,
+			(int)pTitle[i].TransPos.Position.y + i,
+			pTitle[i].Texture);
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			(int)pTitle[i].TransPos.Position.x,
 			(int)pTitle[i].TransPos.Position.y + i,
 			pTitle[i].Texture);
+		*/
 	}
 
 	for (int i = 0; i < 2; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(pMenu[i].TransPos.Position.x),
+			int(pMenu[i].TransPos.Position.y + i),
+			pMenu[i].Texture, pMenu[i].Color);
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(pMenu[i].TransPos.Position.x),
 			int(pMenu[i].TransPos.Position.y+i),
 			pMenu[i].Texture, pMenu[i].Color);
+		*/
 	}
 }
 
