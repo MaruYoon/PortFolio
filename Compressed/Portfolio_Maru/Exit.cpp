@@ -35,10 +35,16 @@ void Exit::Render()
 {
 	for (int i = 0; i < 8; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(TransInfo.Position.x - (TransInfo.Scale.x)),
+			int(TransInfo.Position.y - (TransInfo.Scale.y) + i),
+			Texture[i]);
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(TransInfo.Position.x - (TransInfo.Scale.x)),
 			int(TransInfo.Position.y - (TransInfo.Scale.y) + i),
 			Texture[i]);
+		*/
 	}
 
 }

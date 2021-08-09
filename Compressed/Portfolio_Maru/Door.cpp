@@ -38,16 +38,29 @@ void Door::Render()
 {
 	for (int i = 0; i < 7; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(TransInfo.Position.x - (TransInfo.Scale.x)),
+			int(TransInfo.Position.y - (TransInfo.Scale.y) + i),
+			Texture[i]);
+
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(TransInfo.Position.x - (TransInfo.Scale.x)),
 			int(TransInfo.Position.y - (TransInfo.Scale.y) + i),
 			Texture[i]);
+		*/
 	}
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
+		int(TransInfo.Position.x - 1),
+		int(TransInfo.Position.y - 5),
+		Index);
 
+	/*
 	DoubleBuffer::GetInstance()->WriteBuffer(
 		int(TransInfo.Position.x - 1),
 		int(TransInfo.Position.y - 5),
 		Index);
+	*/
 }
 
 void Door::Release()

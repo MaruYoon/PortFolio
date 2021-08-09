@@ -257,5 +257,8 @@
     <ClInclude Include="CheckMission.h">
       <Filter>소스 파일\02.Object\CheckMission</Filter>
     </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 class Object;
 class ObjectManager
 {
+	/*
 private:
 	static ObjectManager* m_pinstance;
 public:
@@ -14,6 +15,10 @@ public:
 
 		return m_pinstance;
 	}
+	*/
+public:
+	DECLARE_SINGLETON(ObjectManager)
+
 
 private:
 

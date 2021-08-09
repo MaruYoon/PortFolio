@@ -32,6 +32,8 @@ int Bullet::Update()
 
 void Bullet::Render()
 {
+	GETSINGLETON(DoubleBuffer)->WriteBuffer()
+
 	DoubleBuffer::GetInstance()->WriteBuffer(
 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)+1),

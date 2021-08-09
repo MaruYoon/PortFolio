@@ -83,7 +83,8 @@ void Room::Initialize()
 
 int Room::Update()
 {
-	Transform* pTransPos = ObjectManager::Getinstance()->GetTopPlayer();
+	//Transform* pTransPos = ObjectManager::Getinstance()->GetTopPlayer();
+	Transform* pTransPos = GETSINGLETON(ObjectManager)->GetTopPlayer();
 	
 	int iX = (int)pTransPos->Position.x;
 	int iY = (int)pTransPos->Position.y;
@@ -91,8 +92,9 @@ int Room::Update()
 	Vector3 TempPos = Vector3(iX, iY);
 
 
-	ULONG ulKey = InputManager::Getinstance()->GetKey();
-
+	//ULONG ulKey = InputManager::Getinstance()->GetKey();
+	ULONG ulKey = GETSINGLETON(InputManager)->GetKey();
+ 
 	if (ulKey & KEYID_W)
 		pTransPos->Position.y--;
 	
@@ -106,7 +108,8 @@ int Room::Update()
 		pTransPos->Position.x++;
 
 
-	if (ObjectManager::Getinstance()->GetCheckInRoom())
+	//if (ObjectManager::Getinstance()->GetCheckInRoom())
+	if (GETSINGLETON(ObjectManager)->GetCheckInRoom())
 	{
 		for (int y = 0; y < 25; ++y)
 		{
@@ -130,7 +133,8 @@ int Room::Update()
 					Array[(int)pTransPos->Position.y - 1][int(pTransPos->Position.x / 2) + 1] == 4)
 				{
 					if (GetAsyncKeyState('W'))
-						ObjectManager::Getinstance()->SetCheckInRoom(false);
+						GETSINGLETON(ObjectManager)->SetCheckInRoom(false);
+						//ObjectManager::Getinstance()->SetCheckInRoom(false);
 				}
 			}
 		}
@@ -160,7 +164,6 @@ int Room::Update()
 	}
 	*/
 
-
 	return 0;
 }
 
@@ -170,10 +173,16 @@ void Room::Render()
 	{
 		for (int x = 0; x < 46; ++x)
 		{
+			GETSINGLETON(DoubleBuffer)->WriteBuffer(
+				Tilemap[y][x].x,
+				Tilemap[y][x].y,
+				Texture[y][x]);
+			/*
 			DoubleBuffer::GetInstance()->WriteBuffer(
 				Tilemap[y][x].x,
 				Tilemap[y][x].y,
 				Texture[y][x]);
+			*/
 		}
 
 		/*

@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-InputManager* InputManager::m_pinstance = NULL;
+//InputManager* InputManager::m_pinstance = NULL;
 
 InputManager::InputManager()
 {

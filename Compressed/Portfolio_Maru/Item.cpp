@@ -161,8 +161,10 @@ void Item::Initialize()
 	 */
 
 	 
+	 
 
-	 if (ObjectManager::Getinstance()->GetCheckInRoom() == true)
+	 //if (ObjectManager::Getinstance()->GetCheckInRoom() == true)
+	 if (GETSINGLETON(ObjectManager)->GetCheckInRoom() == true)
 	 {
 		 switch (rand() % 3 + 1)
 		 {
@@ -191,7 +193,8 @@ void Item::Initialize()
 
 int Item::Update()
 {
-	if (CollisionManager::CollisionRact(*ObjectManager::Getinstance()->GetTopPlayer(), TransInfo))
+	//if (CollisionManager::CollisionRact(*ObjectManager::Getinstance()->GetTopPlayer(), TransInfo))
+	if (CollisionManager::CollisionRact(GETSINGLETON(ObjectManager)->GetInstance()->GetTopPlayer(), TransInfo))
 	{
 		Collision = true;
 
@@ -221,10 +224,17 @@ void Item::Render()
 	{
 		for (int i = 0; i < 3; ++i)
 		{
+			GETSINGLETON(DoubleBuffer)->WriteBuffer(
+				int(TransInfo.Position.x - (TransInfo.Scale.x)),
+				int(TransInfo.Position.y - (TransInfo.Scale.y) + i),
+				_Item[Horizontal][Motion][i]);
+
+			/*
 			DoubleBuffer::GetInstance()->WriteBuffer(
 				int(TransInfo.Position.x - (TransInfo.Scale.x)),
 				int(TransInfo.Position.y - (TransInfo.Scale.y)+i),
 				_Item[Horizontal][Motion][i]);
+			*/
 		}
 
 		
@@ -240,10 +250,17 @@ void Item::Render()
 	}
 	else
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(TransInfo.Position.x - (TransInfo.Scale.x)),
+			int(TransInfo.Position.y - (TransInfo.Scale.y)),
+			Texture[0]);
+
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(TransInfo.Position.x - (TransInfo.Scale.x)),
 			int(TransInfo.Position.y - (TransInfo.Scale.y)),
 			Texture[0]);
+		*/
 	}
 }
 

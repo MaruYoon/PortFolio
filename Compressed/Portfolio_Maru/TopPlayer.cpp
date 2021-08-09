@@ -70,10 +70,17 @@ void TopPlayer::Render()
 {
 	for (int i = 0; i < 3; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)) + 1,
+			int(TransInfo.Position.y - (TransInfo.Scale.y / 2)) + i + 1,
+			Texture[Horizontal][Motion][i]);
+
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)) + 1,
 			int(TransInfo.Position.y - (TransInfo.Scale.y / 2)) + i + 1,
 			Texture[Horizontal][Motion][i]);
+		*/
 	}
 }
 
@@ -83,7 +90,9 @@ void TopPlayer::Release()
 
 void TopPlayer::_CheckKey()
 {
-	ULONG ulKey = InputManager::Getinstance()->GetKey();
+	//ULONG ulKey = InputManager::Getinstance()->GetKey();
+
+	ULONG ulKey = GETSINGLETON(InputManager)->GetKey();
 
 	if (ulKey & KEYID_W)
 	{

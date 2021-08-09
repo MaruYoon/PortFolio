@@ -3,6 +3,10 @@
 
 class DoubleBuffer
 {
+public:
+	DECLARE_SINGLETON(DoubleBuffer)
+
+	/*
 private:
 	static DoubleBuffer* m_pInstance;
 public:
@@ -13,6 +17,8 @@ public:
 
 		return m_pInstance;
 	}
+	*/
+
 private:
 	int		m_iBufferIndex;		// ¹öÆÛ Index
 	HANDLE	m_HBuffer[2];		// HANDLE

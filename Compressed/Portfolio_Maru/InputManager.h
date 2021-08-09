@@ -3,6 +3,7 @@
 
 class InputManager
 {
+	/*
 private:
 	static InputManager* m_pinstance;
 public:
@@ -13,6 +14,10 @@ public:
 
 		return m_pinstance;
 	}
+	*/
+
+public:
+	DECLARE_SINGLETON(InputManager)
 
 private:
 	ULONG m_ulKey;

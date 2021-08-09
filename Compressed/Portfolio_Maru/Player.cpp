@@ -122,16 +122,24 @@ void Player::Render()
 {
 	for (int i = 0; i < 3; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+			int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + i),
+			Texture[Horizontal][Motion][i]);
+
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
 			int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + i),
 			Texture[Horizontal][Motion][i]);
+		*/
 	}
 }
 
 void Player::CheckKey()
 {
-	ULONG ulKey = InputManager::Getinstance()->GetKey();
+	//ULONG ulKey = InputManager::Getinstance()->GetKey();
+	ULONG ulKey = GETSINGLETON(InputManager)->GetKey();
 
 	if (ulKey & KEYID_LEFT)
 	{

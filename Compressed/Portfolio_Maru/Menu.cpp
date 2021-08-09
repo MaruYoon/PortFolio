@@ -131,6 +131,11 @@ void Menu::Render()
 {
 	for (int i = 0; i < 26; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			(int)Trans[i].TransPos.Position.x,
+			(int)Trans[i].TransPos.Position.y + i,
+			Trans[i].Texture);
+
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			(int)Trans[i].TransPos.Position.x,
 			(int)Trans[i].TransPos.Position.y + i,

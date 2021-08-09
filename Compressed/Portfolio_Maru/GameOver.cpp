@@ -54,7 +54,8 @@ void GameOver::Update()
 {
 	if (GetAsyncKeyState(VK_ESCAPE))
 	{
-		SceneManager::Getinstance()->SetScene(SCENEID_LOGO);
+		GETSINGLETON(SceneManager)->SetScene(SCENEID_LOGO);
+		//SceneManager::Getinstance()->SetScene(SCENEID_LOGO);
 	}
 
 }
@@ -63,10 +64,16 @@ void GameOver::Render()
 {
 	for (int i = 0; i < 27; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(Trans[i].TransPos.Position.x),
+			int(Trans[i].TransPos.Position.y) + i,
+			Trans[i].Texture);
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(Trans[i].TransPos.Position.x),
 			int(Trans[i].TransPos.Position.y) + i,
 			Trans[i].Texture);
+		*/
 	}
 }
 

@@ -191,6 +191,7 @@
     <ClInclude Include="Room.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SingleTon.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Story.h" />
     <ClInclude Include="Struct.h" />

@@ -55,7 +55,8 @@ void Logo::Update()
 {
 	if (GetAsyncKeyState(VK_RETURN))
 	{
-		SceneManager::Getinstance()->SetScene(SCENEID_STORY);
+		GETSINGLETON(SceneManager)->SetScene(SCENEID_STORY);
+		//SceneManager::Getinstance()->SetScene(SCENEID_STORY);
 	}
 }
 
@@ -63,16 +64,28 @@ void Logo::Render()
 {
 	for (int i = 0; i < 25; ++i)
 	{
+		GETSINGLETON(DoubleBuffer)->WriteBuffer(
+			int(Trans[i].TransPos.Position.x),
+			int(Trans[i].TransPos.Position.y + i),
+			Trans[i].Texture);
+		/*
 		DoubleBuffer::GetInstance()->WriteBuffer(
 			int(Trans[i].TransPos.Position.x),
 			int(Trans[i].TransPos.Position.y + i),
 			Trans[i].Texture);	
+		*/
 	}
 
+	GETSINGLETON(DoubleBuffer)->WriteBuffer(
+		int(Trans[26].TransPos.Position.x),
+		int(Trans[26].TransPos.Position.y),
+		Trans[26].Texture, Trans[26].Color);
+	/*
 	DoubleBuffer::GetInstance()->WriteBuffer(
 		int(Trans[26].TransPos.Position.x),
 		int(Trans[26].TransPos.Position.y),
 		Trans[26].Texture, Trans[26].Color);
+	*/
 }
 
 void Logo::Release()

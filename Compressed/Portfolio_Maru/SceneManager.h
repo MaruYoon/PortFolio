@@ -4,6 +4,7 @@
 class Scene;
 class SceneManager
 {
+	/*
 private:
 	static SceneManager* m_pinstance;
 public:
@@ -14,6 +15,9 @@ public:
 
 		return m_pinstance;
 	}
+	*/
+public:
+	DECLARE_SINGLETON(SceneManager)
 
 private:
 	Scene* m_pSceneState;

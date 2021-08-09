@@ -15,6 +15,6 @@ using namespace std;
 #include "Define.h"
 #include "Struct.h"
 #include "Constant.h"
-
+#include "SingleTon.h"
 
 //#define EDITMODE

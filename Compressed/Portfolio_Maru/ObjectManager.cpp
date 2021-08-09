@@ -18,7 +18,7 @@
 #include "CheckMission.h"
 
 
-ObjectManager* ObjectManager::m_pinstance = NULL;
+//ObjectManager* ObjectManager::m_pinstance = NULL;
 
 
 ObjectManager::ObjectManager()
@@ -226,7 +226,8 @@ void ObjectManager::Update()
 					}
 					else
 					{
-						SceneManager::Getinstance()->SetScene(SCENEID_EXIT);
+						GETSINGLETON(SceneManager)->SetScene(SCENEID_EXIT);
+						//SceneManager::Getinstance()->SetScene(SCENEID_EXIT);
 					}
 					(pEnemyList)->front()->SetActive(false);
 				}
@@ -234,7 +235,8 @@ void ObjectManager::Update()
 		}
 	}
 
-	ULONG ulKey = InputManager::Getinstance()->GetKey();
+	//ULONG ulKey = InputManager::Getinstance()->GetKey();
+	ULONG ulKey = GETSINGLETON(InputManager)->GetKey();
 
 	for (int i = 0; i < 9; ++i)
 	{

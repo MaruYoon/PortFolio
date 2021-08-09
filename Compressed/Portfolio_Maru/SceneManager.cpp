@@ -5,7 +5,7 @@
 #include "Story.h"
 #include "GameOver.h"
 
-SceneManager* SceneManager::m_pinstance = NULL;
+//SceneManager* SceneManager::m_pinstance = NULL;
 
 SceneManager::SceneManager(): m_pSceneState(NULL)
 {
